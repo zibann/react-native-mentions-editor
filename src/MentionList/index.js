@@ -27,6 +27,7 @@ export class MentionList extends React.PureComponent {
         onSuggestionTap={this.props.onSuggestionTap}
         item={item}
         editorStyles={this.props.editorStyles}
+        sourceEmpty={this.props.sourceEmpty}
       />
     );
   };

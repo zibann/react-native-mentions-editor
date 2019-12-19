@@ -571,6 +571,7 @@ export class Editor extends React.Component {
             isTrackingStarted={state.isTrackingStarted}
             onSuggestionTap={this.onSuggestionTap}
             editorStyles={editorStyles}
+            sourceEmpty={props.sourceEmpty}
           />
         )}
         {/* <View style={[styles.container, editorStyles.mainContainer]}>
