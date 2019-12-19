@@ -47,7 +47,7 @@ export class MentionList extends React.PureComponent {
   render() {
     const { props } = this;
 
-    const { keyword, isTrackingStarted } = props;
+    const { keyword, isTrackingStarted, editorStyles } = props;
     const withoutAtKeyword = keyword.substr(1, keyword.length);
     const list = this.props.list;
     const listSuggest = this.filterUser(withoutAtKeyword)
@@ -59,11 +59,11 @@ export class MentionList extends React.PureComponent {
       <Animated.View
         style={[
           { ...styles.suggestionsPanelStyle },
-          this.props.editorStyles.mentionsListWrapper
+          editorStyles.mentionsListWrapper
         ]}
       >
         <FlatList
-          style={styles.mentionsListContainer}
+          style={[styles.mentionsListContainer, editorStyles.mentionsListContainer]}
           keyboardShouldPersistTaps={"always"}
           horizontal={false}
           ListEmptyComponent={
@@ -73,10 +73,8 @@ export class MentionList extends React.PureComponent {
           }
           enableEmptySections={true}
           data={suggestions}
-          keyExtractor={(item, index) => `${item.id}-${index}`}
-          renderItem={rowData => {
-            return this.renderSuggestionsRow(rowData);
-          }}
+          keyExtractor={(item, index) => `${item.ref}-${index}`}
+          renderItem={rowData => this.renderSuggestionsRow(rowData)}
         />
       </Animated.View>
     );
