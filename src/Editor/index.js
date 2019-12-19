@@ -111,6 +111,7 @@ export class Editor extends React.Component {
         inputText: "",
         formattedText: ""
       });
+      this.mentionsMap.clear();
     }
   }
 
