@@ -30,16 +30,28 @@ export class MentionList extends React.PureComponent {
       />
     );
   };
+
+  filterUser = keyword => {
+    const list = this.props.list;
+    let arr = [];
+    for (const item of list) {
+      if (
+        item.username.toLowerCase().indexOf(keyword.toLowerCase().trim()) !== -1
+      ) {
+        arr.push(item);
+      }
+    }
+    return arr;
+  };
+
   render() {
     const { props } = this;
 
     const { keyword, isTrackingStarted } = props;
     const withoutAtKeyword = keyword.substr(1, keyword.length);
     const list = this.props.list;
-    const suggestions =
-      withoutAtKeyword !== ""
-        ? list.filter(user => user.username.includes(withoutAtKeyword))
-        : list;
+    const listSuggest = this.filterUser(withoutAtKeyword)
+    const suggestions = listSuggest.length ? listSuggest : list;
     if (!isTrackingStarted) {
       return null;
     }
