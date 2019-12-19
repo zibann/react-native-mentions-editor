@@ -225,7 +225,10 @@ export class Editor extends React.Component {
      * are any adjcent mentions text with the new one.
      */
     // const {inputText, menIndex} = this.state;
-    let initialStr = inputText.substr(0, menIndex).trim();
+    // let initialStr = inputText.substr(0, menIndex).trim();
+
+    // replace last string
+    let initialStr = inputText.slice(0, inputText.length - inputText.split(' ').pop().length)
     if (!EU.isEmpty(initialStr)) {
       initialStr = initialStr + " ";
     }
@@ -276,8 +279,7 @@ export class Editor extends React.Component {
     );
 
     const username = `@${user.username}`;
-    // const text = `${initialStr}${username} ${remStr}`;
-    const text =  inputText.slice(0, inputText.length - inputText.split(' ').pop().length) +  `${username} `
+    const text = `${initialStr}${username} ${remStr}`;
     //'@[__display__](__id__)' ///find this trigger parsing from react-mentions
 
     //set the mentions in the map.
