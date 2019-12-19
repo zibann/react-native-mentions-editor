@@ -20,5 +20,12 @@ export default StyleSheet.create({
     maxHeight: 120,
     alignItems: 'center',
     padding: 10
+  },
+  shadow: {
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.5,
+    elevation: 2,
+    shadowRadius: 1
   }
 });

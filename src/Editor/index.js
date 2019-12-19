@@ -126,6 +126,7 @@ export class Editor extends React.Component {
 
   startTracking(menIndex) {
     this.isTrackingStarted = true;
+    this.openSuggestionsPanel();
     this.menIndex = menIndex;
     this.setState({
       keyword: "",
@@ -136,7 +137,7 @@ export class Editor extends React.Component {
 
   stopTracking() {
     this.isTrackingStarted = false;
-    // this.closeSuggestionsPanel();
+    this.closeSuggestionsPanel();
     this.setState({
       isTrackingStarted: false
     });
@@ -550,6 +551,20 @@ export class Editor extends React.Component {
     }
   };
 
+  openSuggestionsPanel() {
+    Animated.timing(this.state.suggestionRowHeight, {
+      toValue: 100, //height
+      duration: 500,
+    }).start();
+  }
+
+  closeSuggestionsPanel() {
+    Animated.timing(this.state.suggestionRowHeight, {
+      toValue: 0,
+      duration: 500,
+    }).start();
+  }
+
   render() {
     const { props, state } = this;
     const { editorStyles = {} } = props;
@@ -569,72 +584,43 @@ export class Editor extends React.Component {
         {props.renderMentionList ? (
           props.renderMentionList(mentionListProps)
         ) : (
-          <MentionList
-            list={props.list}
-            keyword={state.keyword}
-            isTrackingStarted={state.isTrackingStarted}
-            onSuggestionTap={this.onSuggestionTap}
-            editorStyles={editorStyles}
-            sourceEmpty={props.sourceEmpty}
-          />
-        )}
-        {/* <View style={[styles.container, editorStyles.mainContainer]}>
-          <ScrollView
-            ref={scroll => {
-              this.scroll = scroll;
-            }}
-            onContentSizeChange={() => {
-              this.scroll.scrollToEnd({ animated: true });
-            }}
-            style={[styles.editorContainer, editorStyles.editorContainer]}
+          <Animated.View
+            style={[
+              styles.shadow,
+              { height: state.suggestionRowHeight },
+              editorStyles.mentionsListWrapper,
+            ]}
           >
-            <View style={[{ height: this.state.editorHeight }]}>
-              <View
-                style={[
-                  styles.formmatedTextWrapper,
-                  editorStyles.inputMaskTextWrapper
-                ]}
-              >
-                {state.formattedText !== "" ? (
-                  <Text
-                    style={[styles.formmatedText, editorStyles.inputMaskText]}
-                  >
-                    {state.formattedText}
-                  </Text>
-                ) : (
-                  <Text
-                    style={[
-                      styles.placeholderText,
-                      editorStyles.placeholderText
-                    ]}
-                  >
-                    {state.placeholder}
-                  </Text>
-                )}
-              </View> */}
-              <View style={styles.inputWrapper}>
-                <Image source={props.leftIcon} style={styles.leftIcon} resizeMode={'contain'}/>
-                <TextInput
-                  ref={input => props.onRef && props.onRef(input)}
-                  style={[styles.input, editorStyles.input]}
-                  multiline
-                  name={"message"}
-                  value={state.inputText}
-                  onBlur={props.toggleEditor}
-                  onChangeText={this.onChange}
-                  selection={this.state.selection}
-                  selectionColor={"#000"}
-                  onSelectionChange={this.handleSelectionChange}
-                  placeholder={state.placeholder}
-                  onContentSizeChange={this.onContentSizeChange}
-                  {...this.props}
-                />
-                {props.renderButtonSubmit && props.renderButtonSubmit()}
-              </View>
-
-            {/* </View> */}
-          {/* </ScrollView> */}
-        {/* </View> */}
+            <MentionList
+              list={props.list}
+              keyword={state.keyword}
+              isTrackingStarted={state.isTrackingStarted}
+              onSuggestionTap={this.onSuggestionTap}
+              editorStyles={editorStyles}
+              sourceEmpty={props.sourceEmpty}
+            />
+          </Animated.View>
+        )}
+       
+        <View style={styles.inputWrapper}>
+          <Image source={props.leftIcon} style={styles.leftIcon} resizeMode={'contain'}/>
+          <TextInput
+            ref={input => props.onRef && props.onRef(input)}
+            style={[styles.input, editorStyles.input]}
+            multiline
+            name={"message"}
+            value={state.inputText}
+            onBlur={props.toggleEditor}
+            onChangeText={this.onChange}
+            selection={this.state.selection}
+            selectionColor={"#000"}
+            onSelectionChange={this.handleSelectionChange}
+            placeholder={state.placeholder}
+            onContentSizeChange={this.onContentSizeChange}
+            {...this.props}
+          />
+          {props.renderButtonSubmit && props.renderButtonSubmit()}
+        </View>
       </View>
     );
   }
