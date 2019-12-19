@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ActivityIndicator, FlatList, Animated, View } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 
 import MentionListItem from "../MentionListItem";
 // Styles
@@ -57,27 +57,20 @@ export class MentionList extends React.PureComponent {
       return null;
     }
     return (
-      <Animated.View
-        style={[
-          { ...styles.suggestionsPanelStyle },
-          editorStyles.mentionsListWrapper
-        ]}
-      >
-        <FlatList
-          style={[styles.mentionsListContainer, editorStyles.mentionsListContainer]}
-          keyboardShouldPersistTaps={"always"}
-          horizontal={false}
-          ListEmptyComponent={
-            <View style={styles.loaderContainer}>
-              <ActivityIndicator />
-            </View>
-          }
-          enableEmptySections={true}
-          data={suggestions}
-          keyExtractor={(item, index) => `${item.ref}-${index}`}
-          renderItem={rowData => this.renderSuggestionsRow(rowData)}
-        />
-      </Animated.View>
+      <FlatList
+        style={[styles.mentionsListContainer, editorStyles.mentionsListContainer]}
+        keyboardShouldPersistTaps={"always"}
+        horizontal={false}
+        ListEmptyComponent={
+          <View style={styles.loaderContainer}>
+            <ActivityIndicator />
+          </View>
+        }
+        enableEmptySections={true}
+        data={suggestions}
+        keyExtractor={(item, index) => `${item.ref}-${index}`}
+        renderItem={rowData => this.renderSuggestionsRow(rowData)}
+      />
     );
   }
 }
