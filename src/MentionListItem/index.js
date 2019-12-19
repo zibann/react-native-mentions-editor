@@ -33,9 +33,6 @@ export class MentionListItem extends React.PureComponent {
           />
 
           <View style={[styles.text, editorStyles.mentionListItemTextWrapper]}>
-            <Text style={[styles.title, editorStyles.mentionListItemTitle]}>
-              {user.name}
-            </Text>
             <Text
               style={[styles.username, editorStyles.mentionListItemUsername]}
             >

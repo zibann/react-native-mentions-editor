@@ -28,7 +28,8 @@ export class Editor extends React.Component {
     placeholder: PropTypes.string,
     renderMentionList: PropTypes.func,
     renderButtonSubmit: PropTypes.func,
-    leftIcon: PropTypes.any
+    leftIcon: PropTypes.any,
+    sourceEmpty: PropTypes.any
   };
 
   constructor(props) {
