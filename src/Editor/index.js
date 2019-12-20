@@ -568,11 +568,14 @@ export class Editor extends React.Component {
     }).start();
   }
 
-  callbackIcon = (i) => {
-    const onPress = this.props.callbackIcon
-    this.setState({ inputText: this.state.inputText.concat(i) }, 
-      () => typeof onPress === 'function' && onPress(this.state.inputText)
-    )
+  onChooseIcon = (icon) => {
+    const { inputText } = this.state
+
+    this.setState({
+      inputText: inputText.concat(icon)
+    }, ()=> {
+      this.sendMessageToFooter(inputText)
+    })
   }
 
   render() {
@@ -614,8 +617,8 @@ export class Editor extends React.Component {
         )}
 
         <View style={styles.iconWrapper}>
-          {icons.map((i, index) => (
-            <TouchableOpacity onPress={() => this.callbackIcon(i)} key={index}>
+          {icons.map((icon, index) => (
+            <TouchableOpacity onPress={() => this.onChooseIcon(icon)} key={index}>
               <Text style={styles.icon}>{i}</Text>
             </TouchableOpacity>
           ))}
