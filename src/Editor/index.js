@@ -568,12 +568,10 @@ export class Editor extends React.Component {
   }
 
   onChooseIcon = (icon) => {
-    const { inputText } = this.state
-
     this.setState({
-      inputText: inputText.concat(icon)
+      inputText: this.state.inputText.concat(icon)
     }, ()=> {
-      this.sendMessageToFooter(inputText)
+      this.sendMessageToFooter(this.state.inputText)
     })
   }
 
