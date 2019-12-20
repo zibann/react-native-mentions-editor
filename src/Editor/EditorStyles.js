@@ -27,5 +27,15 @@ export default StyleSheet.create({
     shadowOpacity: 0.5,
     elevation: 2,
     shadowRadius: 1
+  },
+  iconWrapper: {
+    flexDirection: 'row', 
+    justifyContent: 'space-around', 
+    borderTopWidth: StyleSheet.hairlineWidth,
+    padding: 10,
+    borderTopColor: 'gray'
+  },
+  icon: {
+    fontSize: 20
   }
 });

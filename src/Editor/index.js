@@ -29,7 +29,9 @@ export class Editor extends React.Component {
     renderMentionList: PropTypes.func,
     renderButtonSubmit: PropTypes.func,
     leftIcon: PropTypes.any,
-    sourceEmpty: PropTypes.any
+    sourceEmpty: PropTypes.any,
+    callbackIcon: PropTypes.func,
+    icons: PropTypes.array
   };
 
   constructor(props) {
@@ -565,10 +567,18 @@ export class Editor extends React.Component {
     }).start();
   }
 
+  callbackIcon = (i) => {
+    const onPress = this.props.callbackIcon
+    this.setState({ inputText: this.state.inputText.concat(i) }, 
+      () => typeof onPress === 'function' && onPress(this.state.inputText)
+    )
+  }
+
   render() {
     const { props, state } = this;
     const { editorStyles = {} } = props;
-
+    const icons = props.icons || ['😂', '😉', '😍', '😭', '👍', '❤️', '😘', '😎']
+    
     if (!props.showEditor) return null;
 
     const mentionListProps = {
@@ -601,6 +611,14 @@ export class Editor extends React.Component {
             />
           </Animated.View>
         )}
+
+        <View style={styles.iconWrapper}>
+          {icons.map(i => (
+            <TouchableOpacity onPress={() => this.callbackIcon(i)}>
+              <Text style={styles.icon}>{i}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
        
         <View style={styles.inputWrapper}>
           <Image source={props.leftIcon} style={styles.leftIcon} resizeMode={'contain'}/>
