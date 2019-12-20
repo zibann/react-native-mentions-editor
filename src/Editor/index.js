@@ -31,7 +31,6 @@ export class Editor extends React.Component {
     renderButtonSubmit: PropTypes.func,
     leftIcon: PropTypes.any,
     sourceEmpty: PropTypes.any,
-    callbackIcon: PropTypes.func,
     icons: PropTypes.array
   };
 
