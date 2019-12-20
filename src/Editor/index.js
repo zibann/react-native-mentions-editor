@@ -614,8 +614,8 @@ export class Editor extends React.Component {
         )}
 
         <View style={styles.iconWrapper}>
-          {icons.map(i => (
-            <TouchableOpacity onPress={() => this.callbackIcon(i)}>
+          {icons.map((i, index) => (
+            <TouchableOpacity onPress={() => this.callbackIcon(i)} key={index}>
               <Text style={styles.icon}>{i}</Text>
             </TouchableOpacity>
           ))}
@@ -631,7 +631,7 @@ export class Editor extends React.Component {
             value={state.inputText}
             onBlur={props.toggleEditor}
             onChangeText={this.onChange}
-            selection={this.state.selection}
+            selection={Platform.OS === 'ios' ? this.state.selection : null}
             selectionColor={"#000"}
             onSelectionChange={this.handleSelectionChange}
             placeholder={state.placeholder}
