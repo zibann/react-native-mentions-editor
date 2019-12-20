@@ -7,7 +7,8 @@ import {
   Text,
   Animated,
   Platform,
-  Image
+  Image,
+  TouchableOpacity
 } from "react-native";
 
 import EU from "./EditorUtils";
@@ -578,7 +579,7 @@ export class Editor extends React.Component {
     const { props, state } = this;
     const { editorStyles = {} } = props;
     const icons = props.icons || ['😂', '😉', '😍', '😭', '👍', '❤️', '😘', '😎']
-    
+
     if (!props.showEditor) return null;
 
     const mentionListProps = {
