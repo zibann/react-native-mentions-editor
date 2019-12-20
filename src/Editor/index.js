@@ -618,7 +618,7 @@ export class Editor extends React.Component {
         <View style={styles.iconWrapper}>
           {icons.map((icon, index) => (
             <TouchableOpacity onPress={() => this.onChooseIcon(icon)} key={index}>
-              <Text style={styles.icon}>{i}</Text>
+              <Text style={styles.icon}>{icon}</Text>
             </TouchableOpacity>
           ))}
         </View>
