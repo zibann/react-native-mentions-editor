@@ -313,7 +313,7 @@ export class Editor extends React.Component {
       // formattedText: this.formatText(text)
     });
     this.stopTracking();
-    this.sendMessageToFooter(text);
+    this.sendMessageToFooter(isReply ? username : text);
   };
 
   handleSelectionChange = ({ nativeEvent: { selection } }) => {
