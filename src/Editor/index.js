@@ -31,7 +31,8 @@ export class Editor extends React.Component {
     renderButtonSubmit: PropTypes.func,
     leftIcon: PropTypes.any,
     sourceEmpty: PropTypes.any,
-    icons: PropTypes.array
+    icons: PropTypes.array,
+    infoReply: PropTypes.object
   };
 
   constructor(props) {
@@ -114,6 +115,11 @@ export class Editor extends React.Component {
         formattedText: ""
       });
       this.mentionsMap.clear();
+    }
+
+    if (prevProps.infoReply !==  this.props.infoReply) {
+      this.mentionsMap.clear()
+      this.onReplyComment()
     }
   }
 
@@ -269,7 +275,7 @@ export class Editor extends React.Component {
     };
   }
 
-  onSuggestionTap = user => {
+  onSuggestionTap = (user, isReply) => {
     /**
      * When user select a mention.
      * Add a mention in the string.
@@ -303,7 +309,7 @@ export class Editor extends React.Component {
     );
 
     this.setState({
-      inputText: text,
+      inputText: isReply ? `@${this.props.infoReply.username} ` : text,
       // formattedText: this.formatText(text)
     });
     this.stopTracking();
@@ -573,6 +579,11 @@ export class Editor extends React.Component {
     }, ()=> {
       this.sendMessageToFooter(this.state.inputText)
     })
+  }
+
+  onReplyComment = () => {
+    const { infoReply } = this.props
+    this.onSuggestionTap(infoReply, true)
   }
 
   render() {
