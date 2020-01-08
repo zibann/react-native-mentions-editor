@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export default StyleSheet.create({
   input: {
@@ -19,7 +19,12 @@ export default StyleSheet.create({
     flexDirection: 'row',
     maxHeight: 120,
     alignItems: 'center',
-    padding: 10
+    padding: 10,
+    ...Platform.select({
+      android: {
+        paddingTop: 0
+      }
+    })
   },
   shadow: {
     shadowColor: 'black',
@@ -33,7 +38,8 @@ export default StyleSheet.create({
     justifyContent: 'space-around', 
     borderTopWidth: StyleSheet.hairlineWidth,
     padding: 10,
-    borderTopColor: 'gray'
+    borderTopColor: 'gray',
+    paddingBottom: 0
   },
   icon: {
     fontSize: 20
