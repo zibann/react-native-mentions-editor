@@ -36,7 +36,7 @@ export class MentionListItem extends React.PureComponent {
             <Text
               style={[styles.username, editorStyles.mentionListItemUsername]}
             >
-              @{user.username}
+              #{user.username}
             </Text>
           </View>
         </TouchableOpacity>
