@@ -58,7 +58,7 @@ export class Editor extends React.Component {
       isTrackingStarted: false,
       suggestionRowHeight: new Animated.Value(0),
       triggerLocation: "new-words-only", //'new-words-only', //anywhere
-      trigger: "@",
+      trigger: "#",
       selection: {
         start: 0,
         end: 0
@@ -204,7 +204,7 @@ export class Editor extends React.Component {
           `\\${this.state.trigger}[a-z0-9_-]+|\\${this.state.trigger}`,
           `i`
         )
-        // pattern = new RegExp(/(^|\s)(@[a-z\d-]+)/ig)
+        // pattern = new RegExp(/(^|\s)(#[a-z\d-]+)/ig)
       }
       // const str = inputText.substr(this.menIndex);
       // const keywordArray = str.match(pattern);
@@ -220,7 +220,7 @@ export class Editor extends React.Component {
   checkForMention(inputText, selection) {
     /**
      * Open mentions list if user
-     * start typing @ in the string anywhere.
+     * start typing # in the string anywhere.
      */
     const menIndex = selection.start - 1
     // const lastChar = inputText.substr(inputText.length - 1);
@@ -235,7 +235,7 @@ export class Editor extends React.Component {
     //   this.stopTracking();
     // }
 
-    const t = new RegExp("^@[a-zA-Z0-9]*$")
+    const t = new RegExp("^#[a-zA-Z0-9]*$")
     const lastKeyword = inputText.split(" ").pop()
     if (t.test(inputText.split(" ").pop())) {
       this.startTracking(menIndex)
@@ -266,7 +266,7 @@ export class Editor extends React.Component {
       initialStr = initialStr + " "
     }
     /**
-     * remove the characters adjcent with @ sign
+     * remove the characters adjcent with # sign
      * and extract the remaining part
      */
     let remStr =
@@ -291,7 +291,7 @@ export class Editor extends React.Component {
       adjMentIndexes
     )
     mentionKeys.forEach(key => {
-      remStr = `@${this.mentionsMap.get(key).username} ${remStr}`
+      remStr = `#${this.mentionsMap.get(key).username} ${remStr}`
     })
     return {
       initialStr,
@@ -311,9 +311,9 @@ export class Editor extends React.Component {
       menIndex
     )
 
-    const username = `@${user.username}`
+    const username = `#${user.username}`
     const text = `${initialStr}${username} ${remStr}`
-    //'@[__display__](__id__)' ///find this trigger parsing from react-mentions
+    //'#[__display__](__id__)' ///find this trigger parsing from react-mentions
 
     //set the mentions in the map.
     const menStartIndex = initialStr.length
@@ -333,7 +333,7 @@ export class Editor extends React.Component {
     )
 
     this.setState({
-      inputText: isReply ? `@${this.props.infoReply.username} ` : text
+      inputText: isReply ? `#${this.props.infoReply.username} ` : text
       // formattedText: this.formatText(text)
     })
     this.stopTracking()
@@ -385,7 +385,7 @@ export class Editor extends React.Component {
       lastIndex = end + 1
       formattedText.push(initialStr)
       const formattedMention = this.formatMentionNode(
-        `@${men.username}`,
+        `#${men.username}`,
         `${start}-${men.id}-${end}`
       )
       formattedText.push(formattedMention)
@@ -408,7 +408,7 @@ export class Editor extends React.Component {
         start === 1 ? "" : inputText.substring(lastIndex, start)
       lastIndex = end + 1
       formattedText = formattedText.concat(initialStr)
-      formattedText = formattedText.concat(`@${men.ref}`)
+      formattedText = formattedText.concat(`#${men.ref}`)
       if (
         EU.isKeysAreSame(EU.getLastKeyInMap(this.mentionsMap), [start, end])
       ) {
@@ -429,7 +429,7 @@ export class Editor extends React.Component {
         start === 1 ? "" : inputText.substring(lastIndex, start)
       lastIndex = end + 1
       formattedText = formattedText.concat(initialStr)
-      formattedText = formattedText.concat(`@${men.ref}`)
+      formattedText = formattedText.concat(`#${men.ref}`)
       if (
         EU.isKeysAreSame(EU.getLastKeyInMap(this.mentionsMap), [start, end])
       ) {
@@ -555,7 +555,7 @@ export class Editor extends React.Component {
       // selection,
     })
     this.checkForMention(text, selection)
-    // const text = `${initialStr} @[${user.username}](id:${user.id}) ${remStr}`; //'@[__display__](__id__)' ///find this trigger parsing from react-mentions
+    // const text = `${initialStr} #[${user.username}](id:${user.id}) ${remStr}`; //'@[__display__](__id__)' ///find this trigger parsing from react-mentions
 
     this.sendMessageToFooter(text)
   }

@@ -6,7 +6,7 @@
 
 export const displayTextWithMentions = (inputText, formatMentionNode) => {
   /**
-   * Use this function to parse mentions markup @[username](id) in the string value.
+   * Use this function to parse mentions markup #[username](id) in the string value.
    */
   if (inputText === "") return null
   const retLines = inputText.split("\n")
@@ -20,7 +20,7 @@ export const displayTextWithMentions = (inputText, formatMentionNode) => {
         lastIndex = men.end + 1
         formattedText.push(initialStr)
         const formattedMention = formatMentionNode(
-          `@${men.username}`,
+          `#${men.username}`,
           `${index}-${men.id}-${rowIndex}`
         )
         formattedText.push(formattedMention)
@@ -149,9 +149,9 @@ export const EU = {
   isEmpty: str => str === "",
   getMentionsWithInputText: inputText => {
     /**
-     * translate provided string e.g. `Hey @[mrazadar](id:1) this is good work.`
+     * translate provided string e.g. `Hey #[mrazadar](id:1) this is good work.`
      * populate mentions map with [start, end] : {...user}
-     * translate inputText to desired format; `Hey @mrazadar this is good work.`
+     * translate inputText to desired format; `Hey #mrazadar this is good work.`
      */
 
     const map = new Map()
@@ -167,7 +167,7 @@ export const EU = {
         let endIndexDiff = 0
         mentions.forEach((men, index) => {
           newValue = newValue.concat(retLine.substring(lastIndex, men.start))
-          const username = `@${men.username}`
+          const username = `#${men.username}`
           newValue = newValue.concat(username)
           const menEndIndex = men.start + (username.length - 1)
           map.set([men.start - endIndexDiff, menEndIndex - endIndexDiff], {
@@ -203,7 +203,7 @@ export const EU = {
      * @param val string to parse to find mentions
      * @returns list of found mentions
      */
-    let reg = /@\[([^\]]+?)\]\(id:([^\]]+?)\)/gim
+    let reg = /#\[([^\]]+?)\]\(id:([^\]]+?)\)/gim
     let indexes = []
     while ((match = reg.exec(val))) {
       indexes.push({

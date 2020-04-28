@@ -34,7 +34,7 @@ class ChatScreen extends Component {
     super(props);
     this.state = {
       initialValue:
-        "Hey @[mrazadar](id:1) this is good work. Tell @[john.doe](id:5) to use this package.",
+        "Hey #[mrazadar](id:1) this is good work. Tell #[john.doe](id:5) to use this package.",
       showEditor: true,
       message: null,
       messages: [],
@@ -46,7 +46,7 @@ class ChatScreen extends Component {
     /**
      * this callback will be called whenever input value change and will have
      * formatted value for mentioned syntax
-     * @message : {text: 'Hey @(mrazadar)(id:1) this is good work.', displayText: `Hey @mrazadar this is good work`}
+     * @message : {text: 'Hey #(mrazadar)(id:1) this is good work.', displayText: `Hey #mrazadar this is good work`}
      * */
 
     this.setState({
