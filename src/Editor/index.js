@@ -109,10 +109,19 @@ export class Editor extends React.Component {
     //   //don't need to close on false; user show select it.
     //   this.onChange(this.state.inputText, true);
     // }
+    console.log(
+      "initialValue setting1",
+      this.props.initialValue,
+      prevState.initialValue
+    )
 
     if (this.props.initialValue !== prevState.initialValue) {
+      console.log("initialValue setting2", this.props.initialValue)
+
       let msg = ""
-      if (this.props.initialValue && this.props.initialValue !== "") {
+      if (this.props.initialValue) {
+        console.log("initialValue setting3", this.props.initialValue)
+
         const { map, newValue } = EU.getMentionsWithInputText(
           this.props.initialValue
         )
@@ -127,6 +136,13 @@ export class Editor extends React.Component {
           initialValue: this.props.initialValue,
           inputText: msg
         })
+      } else {
+        this.setState({
+          initialValue: "",
+          inputText: "",
+          formattedText: ""
+        })
+        this.mentionsMap.clear()
       }
     }
 
