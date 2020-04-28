@@ -68,7 +68,8 @@ export class Editor extends React.Component {
       editorHeight: 72,
       scrollContentInset: { top: 0, bottom: 0, left: 0, right: 0 },
       placeholder: props.placeholder || "Type something...",
-      mentionList: []
+      mentionList: [],
+      initialValue: props.initialValue
     }
     this.isTrackingStarted = false
     this.previousChar = " "
@@ -108,6 +109,26 @@ export class Editor extends React.Component {
     //   //don't need to close on false; user show select it.
     //   this.onChange(this.state.inputText, true);
     // }
+
+    if (this.props.initialValue !== prevState.initialValue) {
+      let msg = ""
+      if (this.props.initialValue && this.props.initialValue !== "") {
+        const { map, newValue } = EU.getMentionsWithInputText(
+          this.props.initialValue
+        )
+        this.mentionsMap = map
+        msg = newValue
+        // formattedMsg = this.formatText(newValue);
+        setTimeout(() => {
+          this.sendMessageToFooter(newValue)
+        })
+
+        this.setState({
+          initialValue: this.props.initialValue,
+          inputText: msg
+        })
+      }
+    }
 
     if (prevProps.clearInput !== this.props.clearInput) {
       this.setState({
