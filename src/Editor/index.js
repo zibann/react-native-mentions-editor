@@ -112,7 +112,7 @@ export class Editor extends React.Component {
 
     if (this.props.initialValue !== prevState.initialValue) {
       let msg = ""
-      if (this.props.initialValue) {
+      if (this.props.initialValue && this.props.initialValue != "") {
         const { map, newValue } = EU.getMentionsWithInputText(
           this.props.initialValue
         )
