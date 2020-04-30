@@ -120,11 +120,6 @@ export class Editor extends React.Component {
         )
         this.mentionsMap = map
         msg = newValue
-        // formattedMsg = this.formatText(newValue);
-        setTimeout(() => {
-          this.sendMessageToFooter(newValue)
-        })
-
         this.setState({
           inputText: msg
         })
@@ -556,11 +551,11 @@ export class Editor extends React.Component {
       }
     }
 
-    this.setState({
-      inputText: text
-      // formattedText: this.formatText(text)
-      // selection,
-    })
+    // this.setState({
+    //   inputText: text,
+    //   // formattedText: this.formatText(text)
+    //   // selection,
+    // })
     this.checkForMention(text, selection)
     // const text = `${initialStr} #[${user.username}](id:${user.id}) ${remStr}`; //'@[__display__](__id__)' ///find this trigger parsing from react-mentions
 
