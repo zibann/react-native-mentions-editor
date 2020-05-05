@@ -67,7 +67,7 @@ export class Editor extends React.Component {
       showMentions: false,
       editorHeight: 72,
       scrollContentInset: { top: 0, bottom: 0, left: 0, right: 0 },
-      placeholder: props.placeholder || "Type something...",
+      placeholder: props.placeholder || "",
       mentionList: []
     }
     this.isTrackingStarted = false
