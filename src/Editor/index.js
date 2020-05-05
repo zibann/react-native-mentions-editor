@@ -197,13 +197,13 @@ export class Editor extends React.Component {
       let pattern = null
       if (this.state.triggerLocation === "new-word-only") {
         pattern = new RegExp(
-          `\\B${this.state.trigger}[a-z0-9_-]+|\\B${this.state.trigger}`,
+          `\\B${this.state.trigger}[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|_-]+|\\B${this.state.trigger}`,
           `gi`
         )
       } else {
         //anywhere
         pattern = new RegExp(
-          `\\${this.state.trigger}[a-z0-9_-]+|\\${this.state.trigger}`,
+          `\\${this.state.trigger}[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|_-]+|\\${this.state.trigger}`,
           `i`
         )
         // pattern = new RegExp(/(^|\s)(#[a-z\d-]+)/ig)
@@ -237,7 +237,7 @@ export class Editor extends React.Component {
     //   this.stopTracking();
     // }
 
-    const t = new RegExp("^#[a-zA-Z0-9]*$")
+    const t = new RegExp("^#[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]*$")
     const lastKeyword = inputText.split(" ").pop()
     if (t.test(inputText.split(" ").pop())) {
       this.startTracking(menIndex)
@@ -663,11 +663,6 @@ export class Editor extends React.Component {
         )}
 
         <View style={styles.inputWrapper}>
-          <Image
-            source={props.leftIcon}
-            style={styles.leftIcon}
-            resizeMode={"contain"}
-          />
           <TextInput
             ref={input => props.onRef && props.onRef(input)}
             style={[styles.input, editorStyles.input]}
