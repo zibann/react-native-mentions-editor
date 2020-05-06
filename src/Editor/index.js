@@ -662,7 +662,7 @@ export class Editor extends React.Component {
           </Animated.View>
         )}
 
-        <View style={styles.inputWrapper}>
+        <View style={[styles.inputWrapper, this.props.wrapperStyle]}>
           <TextInput
             ref={input => props.onRef && props.onRef(input)}
             style={[styles.input, editorStyles.input]}
