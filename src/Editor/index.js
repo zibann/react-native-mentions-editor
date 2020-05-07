@@ -14,6 +14,7 @@ import {
 import EU from "./EditorUtils"
 import styles from "./EditorStyles"
 import MentionList from "../MentionList"
+import ParsedText from 'react-native-parsed-text'
 
 export class Editor extends React.Component {
   static propTypes = {
@@ -668,7 +669,7 @@ export class Editor extends React.Component {
             style={[styles.input, editorStyles.input]}
             multiline
             name={"message"}
-            value={state.inputText}
+            /* value={state.inputText} */
             onBlur={props.toggleEditor}
             onChangeText={this.onChange}
             selection={Platform.OS === "ios" ? this.state.selection : null}
@@ -677,7 +678,22 @@ export class Editor extends React.Component {
             placeholder={state.placeholder}
             onContentSizeChange={this.onContentSizeChange}
             {...this.props}
-          />
+          >
+            <ParsedText
+              parse={[
+                {
+                  pattern: /#(\w+)/,
+                  style: {
+                    color: 'blue',
+                  },
+                },
+              ]}
+              childrenProps={{allowFontScaling: false}}>
+              {state.inputText}
+            </ParsedText>
+            
+          </TextInput>
+          
           {props.renderButtonSubmit && props.renderButtonSubmit()}
         </View>
       </View>
