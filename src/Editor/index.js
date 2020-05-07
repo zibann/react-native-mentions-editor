@@ -663,7 +663,7 @@ export class Editor extends React.Component {
           </Animated.View>
         )}
 
-        <View style={[styles.inputWrapper, this.props.wrapperStyle]}>
+        <View style={styles.inputWrapper}>
           <TextInput
             ref={input => props.onRef && props.onRef(input)}
             style={[styles.input, editorStyles.input]}
@@ -682,7 +682,7 @@ export class Editor extends React.Component {
             <ParsedText
               parse={[
                 {
-                  pattern: /#(\w+)/,
+                  pattern: /#([\w\u3131-\uD79D]+)/,
                   style: {
                     color: 'blue',
                   },
