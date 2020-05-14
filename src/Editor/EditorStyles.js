@@ -17,7 +17,6 @@ export default StyleSheet.create({
   },
   inputWrapper: {
     flexDirection: 'row',
-    minHeight: 120,
     alignItems: 'center',
     padding: 10,
     ...Platform.select({
